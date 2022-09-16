@@ -55,23 +55,23 @@ function playRound(playerSelection, computerSelection) {
 
 //This part is regarding playerChoice and the input by the player
 function getPlayerChoice() {
-   //valideInput creates a loop
+    //valideInput creates a loop
     let validateInput = false;//we define it as "false"
-    
+
     //applying a loop 
-    while (validateInput == false){
+    while (validateInput == false) {
         //while it is false keep prompting the question
         const choice = prompt("Rock Paper Scissors");
-    
-        if(choice==null){
+
+        if (choice == null) {
             //if null (blank or "cancel" button, I think) keeps
             //the loop going as above
             continue;
         }
         //changes "choice" to lowercase to allow case insensitivity
-        const choiceInLower = choice.toLowerCase(); 
-        
-        if (options.includes(choiceInLower)){
+        const choiceInLower = choice.toLowerCase();
+
+        if (options.includes(choiceInLower)) {
             //here we use "includes" to check if the "choice" (input
             //by the player - converted to lowercase) matches our
             //initial options
@@ -90,33 +90,47 @@ function getPlayerChoice() {
 //console.log(playRound(playerSelection, computerSelection));
 
 //The function game is the loop that initiates the various rounds
-function game(){
-let scorePlayer = 0;
-let scoreComputer = 0;
-
+function game() {
+    
+    //This is used to define the final score
+    let scorePlayer = 0;
+    let scoreComputer = 0;
 
     console.log("Welcome"); //to test the console
-    for (let i=0; i<5;i++){
+
+    //loop for the 5 rounds
+    for (let i = 0; i < 5; i++) {
+        //we get the player and computer's selections from the previously
+        //made functions
         const playerSelection = getPlayerChoice();
         const computerSelection = getComputerChoice();
-        console.log(playRound(playerSelection, computerSelection));
-        if(checkWinner(playerSelection, computerSelection) == Player){
-            scorePlayer++
-        }
-        else if(checkWinner(playerSelection, computerSelection) == Computer){
-            scoreComputer++;
-    }
-    console.log("Game Over")
 
-    if(scorePlayer > scoreComputer){
+        //here we show the round resultsand the dotted line to define 
+        //the end of a round
+        console.log(playRound(playerSelection, computerSelection));
+        console.log("------------");
+
+        if (checkWinner(playerSelection, computerSelection) == "Player") {
+            scorePlayer++
+            //if player wins there's an increment in his score
+        }
+        else if (checkWinner(playerSelection, computerSelection) == "Computer") {
+            scoreComputer++;
+            //if computer wins there's an increment in his score
+        }
+    }
+    console.log("Game Over") //indicates the end of the 5 round game
+
+    //displays the various possible outcomes of the game based on the
+    //final score
+    if (scorePlayer > scoreComputer) {
         console.log("Player was the winner");
     }
-    else if (scorePlayer < scoreComputer){
+    else if (scorePlayer < scoreComputer) {
         console.log("Computer was the winner");
     }
-    else{
+    else {
         console.log('It is a tie')
     }
 }
-
 game();
